@@ -41,8 +41,8 @@ Minitel::Minitel(int rx, int tx) : SoftwareSerial(rx, tx) {
 void Minitel::init() {
 // Serial.begin(1200);
    begin(1200);
-  useDefaultColors();
-  refreshSettings();
+   useDefaultColors();
+   refreshSettings();
 }
 
 byte Minitel::getGraphicChar(String s) {
@@ -75,7 +75,6 @@ void Minitel::serialprint7(byte b) {
   }
   write(b); //ecriture du byte sur le software serial
 }
-
 
 
 void Minitel::graphic(String s, int x, int y) {
@@ -720,17 +719,22 @@ void Minitel::rect(byte c, int x, int y, int w, int h) {
   moveCursorTo(x, y);
   textByte(c);
   repeat(w);
+   
   moveCursorTo(x, y + 1);
-  for (int i = 0; i < h - 2; i++) {
+  for (int i = 0; i < h - 1; i++) { // h-2
     textByte(c);
-    moveCursor(DOWN);
-    moveCursor(LEFT);
+    moveCursorTo(x, y + 1 + i);
+  //  moveCursor(DOWN);
+  //  moveCursor(LEFT);
   }
+
+   
   moveCursorTo(x + w, y + 1);
-  for (int i = 0; i < h - 2; i++) {
+  for (int i = 0; i < h - 1; i++) { // h-2
     textByte(c);
-    moveCursor(DOWN);
-    moveCursor(LEFT);
+    moveCursorTo(x + w, y + 1 + i);     
+//    moveCursor(DOWN);
+//    moveCursor(LEFT);
   }
   moveCursorTo(x, y + h - 1);
   textByte(c);

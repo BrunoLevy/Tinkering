@@ -18,7 +18,6 @@
 
 Minitel m(6,7);
 
-
 /**
  *
  * DEMOS
@@ -340,7 +339,7 @@ void setup() {
 }
 
 void loop() {
- 
+
   long pause = 2000;
 
   demoColor();
