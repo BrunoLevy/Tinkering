@@ -18,7 +18,8 @@ DEMOS=MinitelAsKeyboard \
       MinitelInternetmaTuer \
       MinitelNyanCat \
       MinitelPong \
-      MinitelULLA 
+      MinitelULLA \
+      MinitelImageViewer
 
 all: $(DEMOS)
 
@@ -58,5 +59,10 @@ MinitelPong: examples/MinitelPong/MinitelPong.ino $(RUNTIME)
 	$(CXX) $@.o $(RUNTIME) -lm -o $@
 
 MinitelULLA: examples/MinitelULLA/MinitelULLA.ino $(RUNTIME)
+	$(CXX) -c $(COPT) $< 
+	$(CXX) $@.o $(RUNTIME) -lm -o $@
+
+
+MinitelImageViewer: MinitelImageViewer.cpp $(RUNTIME)
 	$(CXX) -c $(COPT) $< 
 	$(CXX) $@.o $(RUNTIME) -lm -o $@

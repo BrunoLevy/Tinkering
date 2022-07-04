@@ -56,3 +56,6 @@ Links
 - [5](https://archive.softwareheritage.org/browse/origin/directory/?origin_url=https://github.com/01010101/Minitel/)
 - [6](https://info.blaisepascal.fr/3615-tuveuxmaphoto)
 - [7](https://arduiblog.com/2019/04/29/ressuscitez-le-minitel/)
+- [8](https://github.com/cquest/pynitel)
+- [9](https://forum.museeminitel.fr/)
+- [10](https://x0r.fr/blog/5)

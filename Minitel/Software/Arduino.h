@@ -13,6 +13,9 @@
 #include <math.h>
 #include <sys/times.h>
 
+extern int    global_argc;
+extern char** global_argv;
+
 class String : public std::string {
 public:
     
