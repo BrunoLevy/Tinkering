@@ -21,6 +21,10 @@ Minitel m(6,7);
  */
 unsigned char image_data[40*24*6];
 
+// Set to 1 for smoother transitions (8 graylevels)
+// Set to 2 for a more minitel-like rendering (4 graylevels)
+int color_delta = 1;
+
 /**
  * \brief Gets the grayscale intensity of a pixel.
  * \param[in] x , y the coordinates, in 0 .. 79 x 0 .. 23
@@ -69,8 +73,8 @@ static inline int colorDist(int x, int y, int c1, int c2) {
  */
 void nearestColors(int x, int y, int& c1, int & c2) {
     int bestSoFar = -1;
-    for(int tc1 = 0; tc1 < 7; ++tc1) {
-	for(int tc2 = tc1; tc2 < 7; ++tc2) {
+    for(int tc1 = 0; tc1 < 7; tc1 += color_delta) {
+	for(int tc2 = tc1; tc2 < 7; tc2 += color_delta) {
 	    int score =
 		colorDist(x  ,y  ,tc1,tc2) +
 		colorDist(x+1,y  ,tc1,tc2) +
@@ -141,7 +145,7 @@ bool pixelate(int x, int y, int& c1, int& c2, char* pixels) {
     avg_col /= 6;
 
     c1 = c2;
-    c2 = (avg_col > c1) ? c1+1 : c1-1;
+    c2 = (avg_col > c1) ? c1+color_delta : c1-color_delta;
 
     return pixelate(x,y,c1,c2,pixels);
 }
@@ -179,7 +183,8 @@ void showImage() {
 	YELLOW,
 	WHITE
     };
-    
+
+    /*
     static bool image_loaded = false;
     if(!image_loaded) {
 	if(global_argc == 2) {
@@ -187,6 +192,7 @@ void showImage() {
 	}
 	image_loaded = true;
     }
+    */
 
     m.graphicMode();
     m.moveCursorTo(1,1);
@@ -226,5 +232,9 @@ void setup() {
 }
 
 void loop() {
+    static int cur_image = 0;
+    cur_image = (cur_image + 1) % (global_argc - 1);
+    loadImage(global_argv[cur_image+1]);
     showImage();
+    sleep(5);
 }
