@@ -15,7 +15,7 @@ Minitel m(6,7);
 #include <stb/stb_image_resize.h>
 
 /**
- * \brief The imag encoded in grayscale.
+ * \brief The image encoded in grayscale.
  * \details Resolution is 80 x 144.
  *  It will be converted into 40 x 24 graphic characters of 2 x 3 pixels.
  */
